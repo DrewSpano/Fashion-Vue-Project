@@ -44,13 +44,11 @@
 
 <script>
 import LandingPage from './components/LandingPage.vue';
-
 export default {
   name: 'App',
   components: {
     LandingPage,
   },
-
   data () {
       return{
         Username: "Andwer",
@@ -62,7 +60,6 @@ export default {
 
 <style>
   body { overflow: hidden }
-
   header {
     text-align: center;
     position:relative;
@@ -73,7 +70,6 @@ export default {
     grid-template-rows:50px 50px;
     column-gap:5px;
   }
-
   .HeadNav {
     display:grid;
     grid-template-columns:0fr 0fr 0fr;
@@ -84,10 +80,8 @@ export default {
     grid-row-start: 1;
     grid-row-end: 3;
     background-color:bisque;
-
     min-height:100px;
   }
-
   .logo {
     color: black;
     font-weight: bold;
@@ -100,26 +94,21 @@ export default {
     background-color:red;
     z-index: 6;
   }
-
   .hg1nav {
     width: 90px;
   }
-
   .nav {
     color:blue;
     font-weight: bold;
   }
-
   .no-top-border {
     border-top: black
   }
-
   .LogA {
     grid-column-start:3;
     background-color: beige;
     min-width:120px;
   }
-
   .headgroup1 {
     display:grid;
     border-style:solid;

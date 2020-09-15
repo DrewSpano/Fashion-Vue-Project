@@ -50,18 +50,14 @@
         <p class="ColTwo">Want to support? Buy me lunch by clicki ng the link below.</p>
           <v-btn class="ColTwo" color="primary">Thanks :)</v-btn>       
       </v-card>
-      <LoginPage/>
 
   </body>
 </template>
 
 <script>
-import LoginPage from './components/LoginPage.vue';
 export default {
-    name: "LandingPage",    
 
     components: {
-      LoginPage,
     },
     methods: {
       LogUser: function() {             //toggles LoginState. Only used for testing- may delete
