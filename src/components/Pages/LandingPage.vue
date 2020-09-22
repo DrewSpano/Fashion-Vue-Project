@@ -1,0 +1,115 @@
+<template>
+  <body class="LPa">
+
+    <v-card 
+      class="LPb ColTwo"  
+      color="#ffe4c4" 
+      elevation="3"
+    > 
+      <p class="ColTwo">Welcome to my website!</p>
+      <p class="ColTwo">This website exists to help you spend money on things you don't need! 
+      Specifically, Clothing! 
+      How will it do that? check out below!</p>
+      
+      
+    </v-card>
+
+    <v-card 
+      class="LPb ColTwo"  
+      color="#ffe4c4" 
+      elevation="3"
+    > 
+      <p class="ColTwo">
+        I always had folders of bookmarks to check daily or weekly whenever I felt like shopping. 
+        This got cumbersome really fast. So I decided to create something to keep track of all of 
+        them for me!  </p>
+      <p class="ColTwo">
+        Not only that, This website will help you find more websites to spend your money on! 
+        Because this was another issue that I had. The most unique and inspired brands are often 
+        incredibly obscure, independant, hard to find brands. </p>
+      <p class="ColTwo">
+        Hopefully, eventually, this website will help users share the brands they like and discover 
+        new ones! </p>
+    </v-card>
+
+    <v-card 
+      class="LPb ColTwo"  
+      color="#ffe4c4" 
+      elevation="3"
+    >
+      <p class="ColTwo"> "Sounds great! How do I join? How much does it cost?"
+      Good news! You can join for free by making an account below! </p>
+        <v-btn large class="ColTwo ba" color="success" link to="create">Create an account</v-btn>
+      <p class="ColTwo">Already have one?</p>
+        <v-btn 
+          link
+          large
+          class="ColTwo ba" 
+          color="success"
+          to="Login"
+        >
+          Log in here
+        </v-btn>
+
+      <p class="ColTwo">Want to support? Buy me lunch by clicki ng the link below.</p>
+        <v-btn class="ColTwo" color="primary">Thanks :)</v-btn>       
+    </v-card>
+
+  </body>
+</template>
+
+<script>
+export default {
+
+    components: {
+    },
+    methods: {
+      LogUser: function() {             //toggles LoginState. Only used for testing- may delete
+        if (this.LoginState === false) {
+          this.LoginState = true
+        } else{this.LoginState = false}
+      },
+    },
+    props: {
+      myUsername: String
+    }
+}
+</script>
+
+<style>
+  .LPa {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;   
+    grid-auto-rows:auto; 
+    grid-auto-flow:row;
+  }
+  
+  .LPb {
+    margin:20px;
+    padding-top:30px;
+    padding-bottom:30px;
+    min-width: 554px;
+    width: auto;
+    border:solid;
+    font-weight: bold;    
+    text-align:center;
+    word-wrap: break-word;
+
+    display:grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-auto-rows:auto; 
+    grid-auto-flow:row;
+
+    background-color:bisque;
+  }
+
+  .ColTwo{
+    grid-column-start:2;
+  }
+
+  .ba{
+    margin-bottom:20px;
+  }
+
+  
+</style>

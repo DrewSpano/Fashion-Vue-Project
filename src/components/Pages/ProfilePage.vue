@@ -1,23 +1,18 @@
 <template>
-  <body class="LPa">
-
-      <v-card 
-        class="LPb ColTwo"  
-        color="#ffe4c4" 
-        elevation="3"
-      > 
-        <p class="ColTwo">Welcome to my website!</p>
-        <p class="ColTwo">This website exists to help you spend money on things you don't need! 
-        Specifically, Clothing! 
-        How will it do that? check out below!</p>
-      </v-card>
-
+  <body class = LPa>
+        <v-card 
+      class="LPb ColTwo"  
+      color="#ffe4c4" 
+      elevation="3"
+    > 
+      <p class="ColTwo">This page is used for profile details</p>
+    </v-card>
+    
   </body>
 </template>
 
 <script>
 export default {
-    name:"LoginPage"
     
 }
 </script>
@@ -57,5 +52,4 @@ export default {
     margin-bottom:20px;
   }
 
-  
 </style>
