@@ -1,0 +1,26 @@
+"filename", "language", "JSON", "JavaScript", "Markdown", "Vue", "HTML", "comment", "blank", "total"
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\README.md", "Markdown", 0, 0, 19, 0, 0, 0, 6, 25
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\babel.config.js", "JavaScript", 0, 5, 0, 0, 0, 0, 1, 6
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\package-lock.json", "JSON", 12605, 0, 0, 0, 0, 0, 1, 12606
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\package.json", "JSON", 54, 0, 0, 0, 0, 0, 1, 55
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\public\index.html", "HTML", 0, 0, 0, 0, 18, 1, 1, 20
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\App.vue", "Vue", 0, 0, 0, 37, 0, 0, 5, 42
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\BlogPage.vue", "Vue", 0, 0, 0, 45, 0, 2, 8, 55
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\CreatePage.vue", "Vue", 0, 0, 0, 63, 0, 0, 13, 76
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\DashboardPage.vue", "Vue", 0, 0, 0, 33, 0, 0, 5, 38
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\DonatePage.vue", "Vue", 0, 0, 0, 33, 0, 0, 5, 38
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\LandingPage.vue", "Vue", 0, 0, 0, 81, 0, 0, 7, 88
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\LoginPage.vue", "Vue", 0, 0, 0, 89, 0, 0, 11, 100
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\ProfilePage.vue", "Vue", 0, 0, 0, 93, 0, 0, 6, 99
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\TracklistPage.vue", "Vue", 0, 0, 0, 109, 0, 0, 7, 116
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Parts\Header.vue", "Vue", 0, 0, 0, 136, 0, 7, 11, 154
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Parts\track.vue", "Vue", 0, 0, 0, 178, 0, 16, 25, 219
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Parts\trackInput.vue", "Vue", 0, 0, 0, 28, 0, 0, 1, 29
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\counter.vue", "Vue", 0, 0, 0, 49, 0, 0, 5, 54
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\trypic.vue", "Vue", 0, 0, 0, 5, 0, 0, 0, 5
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\main.js", "JavaScript", 0, 18, 0, 0, 0, 0, 5, 23
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\plugins\vuetify.js", "JavaScript", 0, 5, 0, 0, 0, 0, 3, 8
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\routes.js", "JavaScript", 0, 18, 0, 0, 0, 0, 2, 20
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\src\store\store.js", "JavaScript", 0, 67, 0, 0, 0, 13, 17, 97
+"c:\Users\andwer sapno\source\repos\WebProject\web-project\vue.config.js", "JavaScript", 0, 5, 0, 0, 0, 0, 0, 5
+"Total", "-", 12659, 118, 19, 979, 18, 39, 146, 13978

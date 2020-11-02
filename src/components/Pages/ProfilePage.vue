@@ -1,55 +1,99 @@
 <template>
-  <body class = LPa>
-        <v-card 
-      class="LPb ColTwo"  
-      color="#ffe4c4" 
-      elevation="3"
-    > 
-      <p class="ColTwo">This page is used for profile details</p>
-    </v-card>
-    
-  </body>
+  <v-container fluid>
+    <v-row 
+      no-gutters
+      justify="center"
+      align-content="start"
+    >
+      <v-col  lg=7 sm=12>
+
+        <v-sheet 
+          rounded
+          class="LPb ColTwo"  
+          color="#ffe4c4" 
+          elevation="3"
+        >
+          <v-row 
+            no-gutters 
+            align="center" 
+            justify="center"
+          >
+            <v-list-item-avatar
+              tile
+              size="80"
+              color="grey"
+            />
+            <v-col cols="4">
+              <span class="profname">{{$store.state.username}}'s Profile</span>
+            </v-col>
+            <v-col cols="2">
+              <v-icon
+                class="mx-9"
+                size=60
+                color='black'
+              >
+                mdi-cog
+              </v-icon>
+            </v-col>
+            <v-col cols="5">
+              <v-btn 
+                x-large 
+                block 
+                height=80px
+                link to="Tracklist"
+              > 
+                <span class="profname">Tracklist </span>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-sheet>
+
+        <v-sheet
+          rounded
+          class="LPb ColTwo"  
+          color="#ffe4c4" 
+          elevation="3"
+        >
+          <v-row no-gutters>
+            <v-col>
+              <span class="profname"> stats </span>
+              <v-divider/>
+                <v-list disabled color="#ffe4c4">
+                  <v-list-item>Brands followed: [placeholder] </v-list-item>
+                  <v-list-item>Date joined:   [placeholder num 2] </v-list-item>
+                </v-list>
+            </v-col>
+            <v-divider vertical />
+
+            <v-col>
+              <span class="profname"> bio </span>
+              <v-divider/>
+              <v-textarea filled />
+              Social Media links will go here
+            </v-col>
+          </v-row>
+        </v-sheet>
+
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-    
+  props: {
+    myUsername: String
+  }
 }
 </script>
 
-<style>
-  .LPa {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;   
-    grid-auto-rows:auto; 
-    grid-auto-flow:row;
-  }
-  
+<style scoped>
   .LPb {
     margin:20px;
-    padding-top:30px;
-    padding-bottom:30px;
-    min-width: 554px;
-    width: auto;
     border:solid;
-    font-weight: bold;    
-    text-align:center;
-    word-wrap: break-word;
-
-    display:grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-auto-rows:auto; 
-    grid-auto-flow:row;
-
-    background-color:bisque;
+    font-weight: bold;
   }
-
-  .ColTwo{
-    grid-column-start:2;
+  .profname {
+    font-size: 50px
   }
-
-  .ba{
-    margin-bottom:20px;
-  }
-
 </style>

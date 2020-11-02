@@ -1,0 +1,59 @@
+Date : 2020-10-20 21:46:48
+Directory : c:\Users\andwer sapno\source\repos\WebProject\web-project
+Total : 24 files,  13793 codes, 39 comments, 146 blanks, all 13978 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |     12,659 |          0 |          2 |     12,661 |
+| Vue        |         14 |        979 |         25 |        109 |      1,113 |
+| JavaScript |          6 |        118 |         13 |         28 |        159 |
+| Markdown   |          1 |         19 |          0 |          6 |         25 |
+| HTML       |          1 |         18 |          1 |          1 |         20 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                             | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                |         24 |     13,793 |         39 |        146 |     13,978 |
+| public                                                                                           |          1 |         18 |          1 |          1 |         20 |
+| src                                                                                              |         18 |      1,087 |         38 |        136 |      1,261 |
+| src\components                                                                                   |         13 |        942 |         25 |        104 |      1,071 |
+| src\components\Pages                                                                             |          8 |        546 |          2 |         62 |        610 |
+| src\components\Parts                                                                             |          3 |        342 |         23 |         37 |        402 |
+| src\plugins                                                                                      |          1 |          5 |          0 |          3 |          8 |
+| src\store                                                                                        |          1 |         67 |         13 |         17 |         97 |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                         | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\README.md                              | Markdown   |         19 |          0 |          6 |         25 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\babel.config.js                        | JavaScript |          5 |          0 |          1 |          6 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\package-lock.json                      | JSON       |     12,605 |          0 |          1 |     12,606 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\package.json                           | JSON       |         54 |          0 |          1 |         55 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\public\index.html                      | HTML       |         18 |          1 |          1 |         20 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\App.vue                            | Vue        |         37 |          0 |          5 |         42 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\BlogPage.vue      | Vue        |         45 |          2 |          8 |         55 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\CreatePage.vue    | Vue        |         63 |          0 |         13 |         76 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\DashboardPage.vue | Vue        |         33 |          0 |          5 |         38 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\DonatePage.vue    | Vue        |         33 |          0 |          5 |         38 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\LandingPage.vue   | Vue        |         81 |          0 |          7 |         88 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\LoginPage.vue     | Vue        |         89 |          0 |         11 |        100 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\ProfilePage.vue   | Vue        |         93 |          0 |          6 |         99 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Pages\TracklistPage.vue | Vue        |        109 |          0 |          7 |        116 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Parts\Header.vue        | Vue        |        136 |          7 |         11 |        154 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Parts\track.vue         | Vue        |        178 |         16 |         25 |        219 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\Parts\trackInput.vue    | Vue        |         28 |          0 |          1 |         29 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\counter.vue             | Vue        |         49 |          0 |          5 |         54 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\components\trypic.vue              | Vue        |          5 |          0 |          0 |          5 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\main.js                            | JavaScript |         18 |          0 |          5 |         23 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\plugins\vuetify.js                 | JavaScript |          5 |          0 |          3 |          8 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\routes.js                          | JavaScript |         18 |          0 |          2 |         20 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\src\store\store.js                     | JavaScript |         67 |         13 |         17 |         97 |
+| c:\Users\andwer sapno\source\repos\WebProject\web-project\vue.config.js                          | JavaScript |          5 |          0 |          0 |          5 |
+| Total                                                                                            |            |     13,793 |         39 |        146 |     13,978 |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
