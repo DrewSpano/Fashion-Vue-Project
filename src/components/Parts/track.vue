@@ -10,11 +10,12 @@
       <span class="sub"> 
         # {{trackNumber}} 
       </span> 
-      
 
       <!-- Item Name -->
-      <v-col cols=2>
+      <v-col cols=2
+        v-show="trackMore">
         <v-text-field
+          v-show="trackMore"
           :disabled="isEditable"
           label="site name"
           hint="Example: Palace"
@@ -23,8 +24,9 @@
         />
       </v-col>
 
+      <v-col cols=3
+          v-show="trackMore">
       <!-- Item Link -->
-      <v-col cols=3>
         <v-text-field
           :disabled=isEditable
           label="site link"
@@ -34,8 +36,10 @@
         />
       </v-col>
 
+
       <!-- Item Time Slots -->
-      <v-col cols="5">
+      <v-col cols="5"
+          v-show="trackMore">
         <v-row
           no-gutters
           justify="center"
@@ -83,7 +87,34 @@
         </v-row>
       </v-col>
 
-      <!-- Item Buttons -->
+      <!-- Hidden through v-show -->
+      <v-col v-show="!trackMore">
+        <v-row no-gutters>
+      <!-- Item Description -->
+        <v-col>
+        <v-text-field
+          :disabled=isEditable
+          label="site description"
+          hint="A short description or reminder of what to look for at this website"
+          class="mx-1"
+          v-model="trackDescription"
+        />
+        </v-col>
+
+        <v-col>
+          <v-text-field
+            :disabled=isEditable
+            label="tags"
+            hint="Genres or types of products. Separate with a comma: 'tag 1, tag 2'"
+            class="mx-1"
+            v-model="trackTags"
+          />
+        </v-col>
+        </v-row>
+      </v-col>
+
+
+      <!-- Buttons -->
       <v-col cols = 1>
         <!-- Item Edit -->
         <v-btn
@@ -94,14 +125,27 @@
         > {{isEditable ? 'unlock' : 'lock'}}
         </v-btn>
 
+        <!-- Item Next -->
+        <v-btn
+          block
+          tile
+          color="red"
+          @click = "trackMore = !trackMore"
+        > {{trackMore ? 'more' : 'back'}}
+        </v-btn>
+
         <!-- TRACK CLEAR -->
         <v-btn
           block
           tile
           color = "success"
           @click="TrackClear()"
+          
+          :disabled = "isEditable"
         >clear </v-btn>
       </v-col>
+      
+      
 
     </v-row>
   </v-container>
@@ -109,12 +153,13 @@
 
 <script>
 export default {
-  // mounted() {
-  //   console.log('track mounted:', this.num)
-  //   if (this.$store.state.tracklistData.allBlanks(this.num)===true) {
-  //     console.log('track', this.num, 'is blank. Should clear.', this.$store.state.totalTrackers)
-  //   }
-  // },
+  mounted() {
+    //if all the inputs are filled
+    if (this.$store.state.tracklistData.allFilled(this.num) === true) {
+      console.log('track', this.num, 'is all filled. disabling fields');
+      this.isEditable = true;
+    }
+  },
   
   components: {
   },
@@ -125,6 +170,7 @@ export default {
       times: ['1','2','3','4','5','6','7','8','9','10','11','12'],
       listampm: ['am','pm'],
       isEditable: false,
+      trackMore: true,
       trackNumber: this.num,
     }
   },
@@ -186,6 +232,34 @@ export default {
         //edit name
         const payload = {
           name: 'link',
+          number: this.trackNumber,
+          value: value
+        }
+        this.$store.commit('UpdateInfo', payload)
+      }
+    },
+
+    //TRACK DESC.
+    trackDescription: {
+      //look at TRACK NAME for comments
+      get: function () {
+        //edit final item
+        const fullpath = this.$store.state.tracklistData[this.trackNumber]['description']
+        if (typeof fullpath != "undefined") { return fullpath }
+        else {
+          // edit name
+          const path = {
+            name: 'description',
+            number: this.trackNumber
+          }
+          this.$store.commit('CreateInfo', path)
+          return fullpath
+        }
+      },
+      set: function (value) {
+        //edit name
+        const payload = {
+          name: 'description',
           number: this.trackNumber,
           value: value
         }
@@ -276,6 +350,34 @@ export default {
         this.$store.commit('UpdateInfo', payload)
       }
     },
+    
+    trackTags: {
+      //look at TRACK NAME for comments
+      get: function () {
+        //edit final item
+        const fullpath = this.$store.state.tracklistData[this.trackNumber]['tags']
+        if (typeof fullpath != "undefined") { return fullpath }
+        else {
+          // edit name
+          const path = {
+            name: 'tags',
+            number: this.trackNumber
+          }
+          this.$store.commit('CreateInfo', path)
+          return fullpath
+        }
+      },
+      set: function (value) {
+        //edit name
+        const payload = {
+          name: 'tags',
+          number: this.trackNumber,
+          value: value
+        }
+        this.$store.commit('UpdateInfo', payload)
+      }
+    },
+    
     // END OF COMPUTED //
   },
 

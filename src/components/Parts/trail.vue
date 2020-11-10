@@ -12,7 +12,7 @@
           </v-card-subtitle>
 
           <v-card-text>
-            this is where the description should go.
+            {{data[num].description}}
           </v-card-text>
 
           <v-card-actions>

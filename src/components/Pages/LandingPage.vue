@@ -5,7 +5,7 @@
       justify="center"
       align="center"
     >
-      <v-col  lg=7 sm=12>
+      <v-col  lg=9 sm=12>
         <v-sheet 
           rounded
           class="LPb ColTwo"  
@@ -27,17 +27,17 @@
           color="#ffe4c4" 
           elevation="3"
         >
-        <p class="ColTwo">
-          I always had folders of bookmarks to check daily or weekly whenever I felt like shopping. 
-          This got cumbersome really fast. So I decided to create something to keep track of all of 
-          them for me!  </p>
-        <p class="ColTwo">
-          Not only that, This website will help you find more websites to spend your money on! 
-          Because this was another issue that I had. The most unique and inspired brands are often 
-          incredibly obscure, independant, hard to find brands. </p>
-        <p class="ColTwo">
-          Hopefully, eventually, this website will help users share the brands they like and discover 
-          new ones! </p>
+          <p class="ColTwo">
+            Keeping track of every single brand and web store that you want to follow is not easy.
+            Following pages on instagram, subscribing to email newsletters, allowing notifications on your browser...
+            There's no one good way to do it all. So I built this website to do it all for you!</p>
+          <p class="ColTwo">
+            Not only that, This website will help you find more websites to spend your money on! 
+            Because this was another issue that I had. The most unique and inspired brands are often 
+            incredibly obscure, independant, hard to find brands. </p>
+          <p class="ColTwo">
+            Hopefully, eventually, this website will help users share the brands they like and discover 
+            new ones! </p>
         </v-sheet>
 
         <v-sheet

@@ -5,7 +5,7 @@
       align="center"
       justify="center"
     >
-      <v-col  lg=7 sm=12>
+      <v-col  lg=9 sm=12>
         
         <v-sheet 
           rounded

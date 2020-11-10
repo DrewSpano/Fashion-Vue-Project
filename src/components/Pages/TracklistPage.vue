@@ -4,7 +4,7 @@
       no-gutters 
       justify="center"
     >
-      <v-col  lg=7 sm=12>
+      <v-col  lg=9 sm=12>
         <v-sheet
           rounded
           class="LPb ColTwo"  
@@ -106,6 +106,8 @@ export default {
       }
     }
 
+    //removed blank tracks at the list. Works because the code right before this
+    //moves all blank tracks to the end of the list
     for (var ii=1; ii<= totalTrackers; ii++){
       if (tracklistData.allBlanks(ii) === true && typeof(tracklistData[i]) !== undefined) {
         this.$store.commit('setTrack', ii-1)

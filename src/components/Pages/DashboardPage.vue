@@ -6,7 +6,7 @@
       v-for="n in this.$store.state.totalTrackers"
       :key="n"
     >
-      <v-col  lg=7 sm=12>
+      <v-col  lg=9 sm=12>
         <v-sheet
           rounded
           class="LPb ColTwo"  
