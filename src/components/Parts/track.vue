@@ -89,9 +89,9 @@
 
       <!-- Hidden through v-show -->
       <v-col v-show="!trackMore">
-        <v-row no-gutters>
+        <v-row justify="center" align="center">
       <!-- Item Description -->
-        <v-col>
+        <v-col cols=5>
         <v-text-field
           :disabled=isEditable
           label="site description"
@@ -101,7 +101,7 @@
         />
         </v-col>
 
-        <v-col>
+        <v-col cols=5>
           <v-text-field
             :disabled=isEditable
             label="tags"
@@ -152,14 +152,27 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+
 export default {
+
+  created() {
+    //if the track is undefined, set it equal to a blank object
+    //this.$store.commit('TrackCreate', this.num)
+    this.$store.dispatch('TrackCreate', this.num)
+  },
+  
   mounted() {
-    //if all the inputs are filled
-    if (this.$store.state.tracklistData.allFilled(this.num) === true) {
-      console.log('track', this.num, 'is all filled. disabling fields');
+    //if all the inputs are filled, disable fields
+    if (this.$store.getters.trackAllFilled(this.num) === true) {
       this.isEditable = true;
     }
   },
+
+  destroyed() {},
+
+  name: 'track',
   
   components: {
   },
@@ -178,221 +191,121 @@ export default {
   computed: {
     trackName: {
       get: function () {
-        //define the path that the object should exist in
-        //edit 'name' for other items
-        const fullpath = this.$store.state.tracklistData[this.trackNumber]['name']
-        //if fullpath exists, return the info
-        if (typeof fullpath != "undefined") { return fullpath }
-        //if it doesn't exist, create it
-        else {
-          // const path is the info that will be sent to the store
-          //edit 'name' for other items
-          const path = {
-            name: 'name',
-            number: this.trackNumber
-          }
-          //CreateInfo in store sets tracklistData.number.name = ""
-          this.$store.commit('CreateInfo', path)
-          //return the blank info
-          return fullpath
-        }
+        return this.getFieldInfo(this.trackNumber, 'name')
       },
       set: function (value) {
-        //the payload to be sent to the store in order to be saved
-        //edit 'name' for other items
-        const payload = {
-          name: 'name',
-          number: this.trackNumber,
-          //value is the new value inside the text box
-          value: value
-        }
-        //commits info to store
-        this.$store.commit('UpdateInfo', payload)
+        this.setFieldInfo({
+          number: this.trackNumber,   //the track ID
+          name: 'name',               //the track Field
+          value: value                //the content of the field
+        })
       }
     },
 
     //TRACK LINK
     trackLink: {
-      //look at TRACK NAME for comments
       get: function () {
-        //edit final item
-        const fullpath = this.$store.state.tracklistData[this.trackNumber]['link']
-        if (typeof fullpath != "undefined") { return fullpath }
-        else {
-          // edit name
-          const path = {
-            name: 'link',
-            number: this.trackNumber
-          }
-          this.$store.commit('CreateInfo', path)
-          return fullpath
-        }
+        return this.getFieldInfo(this.trackNumber, 'link')
       },
       set: function (value) {
-        //edit name
-        const payload = {
-          name: 'link',
+        this.setFieldInfo({
           number: this.trackNumber,
+          name: 'link',
           value: value
-        }
-        this.$store.commit('UpdateInfo', payload)
+        })
       }
     },
 
     //TRACK DESC.
     trackDescription: {
-      //look at TRACK NAME for comments
       get: function () {
-        //edit final item
-        const fullpath = this.$store.state.tracklistData[this.trackNumber]['description']
-        if (typeof fullpath != "undefined") { return fullpath }
-        else {
-          // edit name
-          const path = {
-            name: 'description',
-            number: this.trackNumber
-          }
-          this.$store.commit('CreateInfo', path)
-          return fullpath
-        }
+        return this.getFieldInfo(this.trackNumber, 'description')
       },
       set: function (value) {
-        //edit name
-        const payload = {
-          name: 'description',
+        this.setFieldInfo({
           number: this.trackNumber,
+          name: 'description',
           value: value
-        }
-        this.$store.commit('UpdateInfo', payload)
+        })
       }
     },
 
     //TRACK DAY
     trackDay: {
-      //look at TRACK NAME for comments
       get: function () {
-        //edit final item
-        const fullpath = this.$store.state.tracklistData[this.trackNumber]['day']
-        if (typeof fullpath != "undefined") { return fullpath }
-        else {
-          // edit name
-          const path = {
-            name: 'day',
-            number: this.trackNumber
-          }
-          this.$store.commit('CreateInfo', path)
-          return fullpath
-        }
+        return this.getFieldInfo(this.trackNumber, 'day')
       },
       set: function (value) {
-        //edit name
-        const payload = {
-          name: 'day',
+        this.setFieldInfo({
           number: this.trackNumber,
+          name: 'day',
           value: value
-        }
-        this.$store.commit('UpdateInfo', payload)
+        })
       }
     },
 
     //TRACK TIME
     trackTime: {
-      //look at TRACK NAME for comments
       get: function () {
-        //edit final item
-        const fullpath = this.$store.state.tracklistData[this.trackNumber]['time']
-        if (typeof fullpath != "undefined") { return fullpath }
-        else {
-          // edit name
-          const path = {
-            name: 'time',
-            number: this.trackNumber
-          }
-          this.$store.commit('CreateInfo', path)
-          return fullpath
-        }
+        return this.getFieldInfo(this.trackNumber, 'time')
       },
       set: function (value) {
-        //edit name
-        const payload = {
-          name: 'time',
+        this.setFieldInfo({
           number: this.trackNumber,
+          name: 'time',
           value: value
-        }
-        this.$store.commit('UpdateInfo', payload)
+        })
       }
     },
 
     //TRACK AMPM
     trackAMPM: {
-      //look at TRACK NAME for comments
       get: function () {
-        //edit final item
-        const fullpath = this.$store.state.tracklistData[this.trackNumber]['ampm']
-        if (typeof fullpath != "undefined") { return fullpath }
-        else {
-          // edit name
-          const path = {
-            name: 'ampm',
-            number: this.trackNumber
-          }
-          this.$store.commit('CreateInfo', path)
-          return fullpath
-        }
+        return this.getFieldInfo(this.trackNumber, 'ampm')
       },
       set: function (value) {
-        //edit name
-        const payload = {
-          name: 'ampm',
+        this.setFieldInfo({
           number: this.trackNumber,
+          name: 'ampm',
           value: value
-        }
-        this.$store.commit('UpdateInfo', payload)
+        })
       }
     },
     
     trackTags: {
-      //look at TRACK NAME for comments
       get: function () {
-        //edit final item
-        const fullpath = this.$store.state.tracklistData[this.trackNumber]['tags']
-        if (typeof fullpath != "undefined") { return fullpath }
-        else {
-          // edit name
-          const path = {
-            name: 'tags',
-            number: this.trackNumber
-          }
-          this.$store.commit('CreateInfo', path)
-          return fullpath
-        }
+        return this.getFieldInfo(this.trackNumber, 'tags')
       },
       set: function (value) {
-        //edit name
-        const payload = {
-          name: 'tags',
+        this.setFieldInfo({
           number: this.trackNumber,
+          name: 'tags',
           value: value
-        }
-        this.$store.commit('UpdateInfo', payload)
+        })
       }
     },
     
+    ...mapGetters({
+      getFieldInfo: 'trackFieldInfo',
+    }),
     // END OF COMPUTED //
   },
 
-  props: [
-    'num',
-  ],
+  props: {
+    num: {
+      type: Number,
+      required: true,
+    }
+  },
 
   methods: {
-    TrackUpdate (payload) {
-      this.$store.commit('TrackUpdate', payload)
+    TrackClear() {
+      this.$store.dispatch('TrackClear', this.trackNumber)
     },
 
-    TrackClear() {
-      this.$store.commit('TrackClear', this.trackNumber)
-    }
+    ...mapActions({
+      setFieldInfo: 'UpdateInfo',
+    })
     // END OF METHODS //
   },
 }

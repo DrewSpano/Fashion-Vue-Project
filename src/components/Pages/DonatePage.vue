@@ -18,6 +18,14 @@
 
 <script>
 export default {
+  data: function (){
+    return{
+    }
+  },
+  
+  computed:{
+  },
+  // END OF COMPUTED //
     
 }
 </script>

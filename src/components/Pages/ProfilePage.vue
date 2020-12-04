@@ -70,6 +70,8 @@
               <v-divider/>
               <v-textarea filled />
               Social Media links will go here
+              <v-btn color="red" @click="$store.dispatch('RESET_DATA')"> reset data </v-btn>
+              {{this.$store.state.totalTrackers}}
             </v-col>
           </v-row>
         </v-sheet>

@@ -86,11 +86,6 @@ export default {
           this.$store.commit('logFalse');
       },
   },
-  data () {
-    return {
-      aaa: 0
-    }
-  }
     
 }
 </script>

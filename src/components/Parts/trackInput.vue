@@ -1,29 +1,23 @@
 <template>
-    <v-text-field
-        :disabled="!canEdit"
-        :label="label"
-        :hint="hint"
-        v-model="testvar"
-    />
+    <v-container fluid>
+        {{last}}
+    </v-container>
 </template>
 
 <script>
+//using this bitch for some code writing now, it's not used in anything so its just a spare file
+import { mapGetters } from 'vuex';
+
 export default {
-    props: [
-        'canEdit',
-        'label',
-        'hint',
-        'value',
-    ],
+    state: {
+        name: 'andrew'
+    },
     computed: {
-        testvar: {
-            get () {
-                return this.$store.state.testvar
-            },
-            set(value) {
-                this.$store.commit('testUpdate',value)
-            }
-        }
+        last: function() {return this.trackFieldInfo(1,'name')},
+
+        ...mapGetters([
+            'trackFieldInfo',
+        ])
     }
 }
 </script>

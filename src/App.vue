@@ -15,15 +15,20 @@
       <router-view
       />
     </v-main>
+
+    <WebFooter/>
+
   </v-app>
 </template>
 
 <script>
 import WebHeader from './components/Parts/Header.vue';
+import WebFooter from './components/Parts/Footer.vue';
 export default {
   name: 'App',
   components: {
     WebHeader,
+    WebFooter,
   },
 };  
 </script>

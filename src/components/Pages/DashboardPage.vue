@@ -3,7 +3,7 @@
     <v-row 
       no-gutters 
       justify="center"
-      v-for="n in this.$store.state.totalTrackers"
+      v-for="n in this.$store.getters.trackTotal"
       :key="n"
     >
       <v-col  lg=9 sm=12>
@@ -15,7 +15,11 @@
         >
           <v-row no-gutters justify="center">
             <v-col cols=10>
-            <Trail :num="n"/>
+            <!--Trail :num="n"/-->
+            <trackgroup
+              :showtrail="true"
+              :lastNum="$store.getters.trackTotal"
+            />
             </v-col>
             <!--v-col cols=10>
               <v-skeleton-loader
@@ -31,10 +35,12 @@
 </template>
 
 <script>
-import Trail from '../Parts/trail';
+//import Trail from '../Parts/trail';
+import trackgroup from '../Parts/trackGroup';
 export default {
   components: {
-    Trail
+    //Trail,
+    trackgroup
   }
     
 }
