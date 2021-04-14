@@ -9,11 +9,6 @@
           elevation="3"
         >
           This is Blog! Check this whenever you want news/info about the site
-          <v-btn
-            @click="store.commit('increment')">asdf
-          </v-btn>    
-          {{store.state.count}}
-          {{cMinusOne}}
 
         </v-sheet>
       </v-col>
@@ -25,15 +20,8 @@
 <script>
 export default{
   methods: {
-    increment () {
-      this.$store.commit('increment')
-    },
-    decrement () {this.$store.commit('decrement')},
   },
   computed: {
-    cMinusOne() {
-      return this.$store.getters.cMinusOne;
-    }
   } 
 }
 </script>

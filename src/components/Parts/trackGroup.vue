@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
-    <span>{{trailArray}} | {{lastNum}} | {{this.$store.getters.trackTotal}}</span>
+    <span v-if="debug">DEBUG: Array: {{trailArray}} | lastNum: {{lastNum}} | total tracks: {{this.$store.getters["Tracks/trackTotal"]}}</span>
+    <span v-if="arrayNum !== null && arrayNum === []"> ERROR: IMPORTING AN EMPTY ARRAY </span>
+    
     <v-row 
       no-gutters 
       justify="center"
@@ -8,7 +10,7 @@
       :key = n
     > 
     <Track :num='n' v-if="showtrack"/>
-    <Trail :num='n' v-if="showtrail" v-show="trailIsActive(n)"/>
+    <Trail :num='n' v-if="showtrail"/>
     </v-row>
 
 
@@ -22,14 +24,18 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   mounted() {
-    this.ReorderUp();
-    this.PruneEnd();
+    console.log('totalTrackers:',this.$store.getters["Tracks/trackTotal"])
+    //reorder tracks
+    // this.ReorderUp();
+    // //remove unused tracks
+    // this.PruneEnd();
+    // //set up group's array
     this.TrailArraySetToDefault();
   },
 
   destroyed() {
-    this.ReorderUp();
-    this.PruneEnd();
+    // this.ReorderUp();
+    // this.PruneEnd();
     this.TrailArraySetToDefault();
   },
 
@@ -40,6 +46,10 @@ export default {
 
   props: {
     totaltohighest: {type:Boolean},
+    debug: {
+      type: Boolean,
+      default: false
+    },
     topdown: {
       //
       type: Boolean
@@ -62,10 +72,15 @@ export default {
     },
     lastNum:{
       type: Number,
+      default: -1,
       //Want to set the default as total trackers, but don't think I can...
       //So instead I'm setting this as required.
       //default: this.$store.getters.trackTotal
-      required: true
+      // required: true
+    },
+    arrayNum:{
+      type: Array,
+      default: null
     },
     skipNum: Number,
     prioNum: Number,
@@ -73,43 +88,35 @@ export default {
   
   data() {
     return {
+      //trailArray is an array of integers that tells the page what order to display tracks or trails in
+      //It uses the computed baseArray as its default, and there are methods that mutate trailArray
       trailArray: [],
     }
   },
 
   computed: {
-    //trackArray exists just in case I didn't properly move things over correctly
-    // trackArray: function () {
-    //   console.log('use baseArray')
-    //   return undefined
-    // },
+    //makes an array based off either the imported array or
+    //the first and last numbers
     baseArray: function ()  {
-      var tempArray = []
-      
-      //add numbers to array
+      let tempArray = [];
+      //arrayNum is a prop that can be passed in to get a desired number of tracks. 
+      //baseArray returns arrayNum if it's anything other than the default value of null
+      if (this.arrayNum !== null) { return this.arrayNum }
+      //defaults for first and last num are 1 and -1
       for (var i=this.firstNum; i<=this.lastNum; i++) {
         if ( i !== this.skipNum ) {
           tempArray.push(i)
         }
-        //this.arrayPush(this.tempArray, i)
       }
-      
-      //move prio to start
-      // if (this.prioBool === true){
-      //   //this.arrayPriority(this.tempArray, this.prioNum)
-      //   tempArray.splice( tempArray.indexOf(this.prioNum),1)
-      //   tempArray.unshift(this.prioNum)
-      // }
-      //console.log('tempArray built:',this.tempArray);
       return tempArray;
     },
 
-    ...mapGetters({
-      trackAllBlanks: 'trackAllBlanks',
-      trackExists: 'trackExists',
-      tracklistData: 'trackData',
+    ...mapGetters('Tracks', {
+      trackAllBlanks: 'trackFalsy',
+      trackExists: 'trackTruthySimple',
+      tracklistData: 'allTracks',
       totalTrackers: 'trackTotal',
-      trailIsActive: 'trackIsActive',
+      
     })
     // END OF COMPUTED //
   },
@@ -129,40 +136,46 @@ export default {
   },
 
   methods: {
-    ReorderUp() {
-      for (var track = 1; track <= this.totalTrackers; track++) {
-        //if the track is blank and is not undefined
-        if(this.trackAllBlanks(track) === true && typeof(this.tracklistData[track]) !== undefined) {
-          //track is blank. Finding good track...
-          for (var newTrack = track + 1; newTrack <= this.totalTrackers; newTrack++) {
-            if (this.trackAllBlanks(newTrack) !== true && this.trackExists(newTrack)) {
-              // REPLACE track WITH newTrack //
+    // we are no longer doing the bulk of organization through the trackGroup,
+    //so these methods are pretty much pointless. I have them commented out
+    //to be sure that they do not accidentally get used.
 
-              var executed = false;
-              if (!executed) {
-                this.trackOverwrite({
-                  trackToClone: newTrack, 
-                  trackToKill: track
-                })
-                executed = true;
-              }
-              break
-            }
-          }
-        }
-      }
-    },
+    // ReorderUp() {
+    //   for (var track = 1; track <= this.totalTrackers; track++) {
+    //     //if the track is blank and is not undefined
+    //     if(this.trackAllBlanks(track) === true && typeof(this.tracklistData[track]) !== undefined) {
+    //       //track is blank. Finding good track... not blank and track exists
+    //       for (var newTrack = track + 1; newTrack <= this.totalTrackers; newTrack++) {
+    //         if (this.trackAllBlanks(newTrack) !== true && this.trackExists(newTrack)) {
+    //           // REPLACE track WITH newTrack //
 
-    PruneEnd () {
-      for (var track=1; track<= this.totalTrackers; track++) {
-        if (this.trackAllBlanks(track) === true && this.trackExists(track) === true) {
-          this.setTrack(track-1)
-          break
-        }
-      }
-    },
+    //           var executed = false;
+    //           if (!executed) {
+    //             this.trackOverwrite({
+    //               trackToClone: newTrack, 
+    //               trackToKill: track
+    //             })
+    //             executed = true;
+    //           }
+    //           break
+    //         }
+    //       }
+    //     }
+    //   }
+    // },
+
+    // PruneEnd () {
+    //   for (var track=1; track<= this.totalTrackers; track++) {
+    //     if (this.trackAllBlanks(track) === true && this.trackExists(track) === true) {
+    //       this.setTrack(track-1)
+    //       break
+    //     }
+    //   }
+    // },
 
     TrailArraySetToDefault () {
+      //trailArray is in data, and baseArray is in computed
+      //We edit trailArray to manipulate the order of the tracks, and use this to return it to normal
       this.trailArray = this.baseArray
     },
 
@@ -172,10 +185,7 @@ export default {
     },
 
     updateTotalToHighest () { //sets trackTotal in store to highest number in array
-      this.$store.dispatch(
-        'setTrack',
-        Math.max.apply(null, this.trailArray)
-      );
+      this.setTrack(Math.max.apply(null, this.trailArray));
     },
 
 
@@ -193,7 +203,7 @@ export default {
     //   targetArray.unshift(priority)
     // },
 
-    ...mapActions({
+    ...mapActions('GeneralStore', {
       trackOverwrite: 'TrackOverwrite',
       trackDelete: 'TrackDelete',
       setTrack: 'setTrack',

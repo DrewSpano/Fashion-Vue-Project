@@ -4,6 +4,8 @@ import vuetify from './plugins/vuetify';
 import VueRouter from 'vue-router';
 import store from "./store/store";
 import { routes } from './routes';
+// import axios from 'axios';
+// import VueAxios from 'vue-axios';
 
 Vue.use(VueRouter);
 

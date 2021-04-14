@@ -4,7 +4,7 @@
       <v-row no-gutters align="end" v-if="trailExists">
         <v-col>
           <v-card-title>
-            {{name}}, {{active}}
+            {{name}} 
           </v-card-title>
 
           <v-card-subtitle>
@@ -24,9 +24,12 @@
         </v-col><v-divider vertical />
 
         <v-col align-self="center">
-          
-          probably putting an image here? <br/>
-          Some stock images for now would be pretty cool.
+          <v-img
+          src="https://www.liveabout.com/thmb/prRidJBUyT8DWQV5UCLqZPbS1x4=/1137x853/smart/filters:no_upscale()/broken_skateboard_106650481-56a878483df78cf7729e3229.jpg"
+          max-height="250"
+          max-width="250"
+          >
+          </v-img>
         </v-col>
 
       </v-row>
@@ -46,6 +49,7 @@ export default {
   data: function() {
     return{
       checked: false,
+      trailNumber: this.num,
     }
   },
   props: [
@@ -53,50 +57,60 @@ export default {
   ],
   computed: {
     trailExists: function() {
-      return this.exists(this.num)
+      return this.exists(this.trailNumber)
     },
     active: function() {
-      return this.trailData(this.num, 'active')
+      return this.trailData(this.trailNumber, 'active')
     },
     name: function() {
-      return this.trailData(this.num, 'name')
+      return this.trailData(this.trailNumber, 'name')
     },
     link: function() {
-      return this.trailData(this.num, 'link')
+      return this.trailData(this.trailNumber, 'link')
+      // return "hi"
     },
     day: function() {
-      return this.trailData(this.num, 'day')
+      return this.trailData(this.trailNumber, 'day')
     },
     time: function() {
-      return this.trailData(this.num, 'time')
+      return this.trailData(this.trailNumber, 'time')
     },
     ampm: function() {
-      return this.trailData(this.num, 'ampm')
+      return this.trailData(this.trailNumber, 'ampm')
     },
     tags: function() {
-      return this.trailData(this.num, 'tags')
+      return this.trailData(this.trailNumber, 'tags')
     },
     description: function() {
-      return this.trailData(this.num, 'description')
+      return this.trailData(this.trailNumber, 'description')
     },
     checkedColor: function() {
       let color = this.checked ? '#3EB489' : ''
       return color
     },
 
-    ...mapGetters({
-      trailData: 'trailFieldInfo',
+    ...mapGetters('GeneralStore',{
+      getTrailData: 'trailFieldInfo',
       exists: 'trackExists'
     }),
   },
 
   methods: {
+    testname() {
+      return this.$store.state.GeneralStore.tracklistData[this.trailNumber]['name']
+
+    },
+
     followLink() {
       this.checked = !this.checked;
       window.open('//' + this.trailData(this.num, 'link'))
     },
 
-    ...mapActions({
+    trailData(trailNumber, field) {
+      return this.getTrailData({trailNumber, field})
+    },
+
+    ...mapActions('GeneralStore',{
       TrackToggleActive: 'TrackToggleActive'
     })
   }

@@ -24,7 +24,7 @@
               color="grey"
             />
             <v-col cols="4">
-              <span class="profname">{{$store.state.username}}'s Profile</span>
+              <span class="profname">{{info.name}}'s Profile</span>
             </v-col>
             <v-col cols="2">
               <v-icon
@@ -70,8 +70,9 @@
               <v-divider/>
               <v-textarea filled />
               Social Media links will go here
-              <v-btn color="red" @click="$store.dispatch('RESET_DATA')"> reset data </v-btn>
-              {{this.$store.state.totalTrackers}}
+              <v-btn color="red" > BROKEN: reset data </v-btn>
+              <!-- @click="$store.dispatch('GeneralStore/RESET_DATA')" -->
+              {{this.$store.state.totalTrackers}} 
             </v-col>
           </v-row>
         </v-sheet>
@@ -82,10 +83,18 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   props: {
     myUsername: String
+  },
+
+  computed: {
+    ...mapGetters('Users',{
+      info: 'info'
+    })
   }
+
 }
 </script>
 

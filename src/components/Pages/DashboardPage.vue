@@ -3,8 +3,6 @@
     <v-row 
       no-gutters 
       justify="center"
-      v-for="n in this.$store.getters.trackTotal"
-      :key="n"
     >
       <v-col  lg=9 sm=12>
         <v-sheet
@@ -13,12 +11,13 @@
           color="#ffe4c4" 
           elevation="3"
         >
+
+
           <v-row no-gutters justify="center">
             <v-col cols=10>
-            <!--Trail :num="n"/-->
             <trackgroup
               :showtrail="true"
-              :lastNum="$store.getters.trackTotal"
+              :lastNum="$store.getters['Tracks/trackTotal']"
             />
             </v-col>
             <!--v-col cols=10>
@@ -35,11 +34,13 @@
 </template>
 
 <script>
-//import Trail from '../Parts/trail';
 import trackgroup from '../Parts/trackGroup';
 export default {
+
+  mounted(){
+    console.log(this)
+  },
   components: {
-    //Trail,
     trackgroup
   }
     

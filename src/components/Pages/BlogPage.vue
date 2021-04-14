@@ -46,9 +46,9 @@
       <v-col >
         <v-btn color="green" class="mx-1 my-1" @click="topdown = !topdown"> move top to bottom </v-btn>
         <v-btn color="red" class="mx-1 my-1"> move #2 up </v-btn>
-        <v-btn color="blue" class="mx-1 my-1" @click="$store.dispatch('TrackDelete', undefined)"> delete undefined </v-btn>
+        <v-btn color="blue" class="mx-1 my-1" @click="Method_TrackDelete"> delete undefined </v-btn>
         <v-btn color="purple" class="mx-1 my-1" @click="totaltohighest = !totaltohighest"> total to highest </v-btn>
-        <v-btn color="yellow" class="mx-1 my-1" @click="$store.dispatch('TrackAllToActive')"> Activate Trails </v-btn>
+        <v-btn color="yellow" class="mx-1 my-1" @click="this.TrackAllToActive"> Activate Trails </v-btn>
       </v-col>
     </v-row>
     <v-divider/>
@@ -71,7 +71,8 @@
 </template>
 
 <script>
-import trackgroup from '../Parts/trackGroup'
+import trackgroup from '../Parts/trackGroup';
+import { mapActions } from 'vuex';
 export default {
   components: {
     trackgroup
@@ -92,11 +93,28 @@ export default {
   },
 
   computed: {
-    firstNumProp: function () {return Number(this.firstNum)},
-    lastNumProp: function () {return Number(this.lastNum)},
+    firstNumProp: function () {return Number (this.firstNum)},
+    lastNumProp: function () {return Number (this.lastNum)},
     skipNumProp: function () {return Number (this.skipNum)},
     prioNumProp: function () {return Number (this.prioNum)},
-
   },
+
+  methods: {
+    Method_TrackAllToActive () {
+      this.TrackAllToActive
+    },
+
+    Method_TrackDelete () {
+      this.TrackDelete(undefined)
+    },
+
+    // ...mapActions('GeneralStore',[
+    //   'TrackDelete',
+    //   'TrackAllToActive'
+    // ]),
+    ...mapActions('Tracks',{
+      TrackDelete: 'delTrack'
+    })
+  }
 }
 </script>

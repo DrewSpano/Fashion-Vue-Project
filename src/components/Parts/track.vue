@@ -7,8 +7,8 @@
       align="center"
     >
       <!-- Item Number -->
-      <span class="sub"> 
-        # {{trackNumber}} 
+      <span class="sub" @click="testMethod()"> 
+        # {{trackNumber}}
       </span> 
 
       <!-- Item Name -->
@@ -114,180 +114,140 @@
       </v-col>
 
 
-      <!-- Buttons -->
+      <!-- ############### Buttons ################### -->
       <v-col cols = 1>
-        <!-- Item Edit -->
-        <v-btn
-          block
-          tile
-          color="success"
-          @click= "isEditable = !isEditable"
-        > {{isEditable ? 'unlock' : 'lock'}}
-        </v-btn>
+        <v-row no-gutters>
+          <v-col cols = 6>
+            <!-- Item Edit -->
+            <v-btn
+              block
+              tile
+              color="success"
+              @click="editOrSave()"
+            > 
+              {{isEditable ? 'edit' : 'save'}}
+            </v-btn>
+          </v-col>
+          <v-col cols = 6>
+            <!-- Item Next -->
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col cols = 6>
+            
+            <v-btn
+              block
+              tile
+              color="red"
+              @click = "trackMore = !trackMore"
+            > 
+              {{trackMore ? 'more' : 'back'}}
+            </v-btn>
+            <!-- TRACK CLEAR -->
+            <!-- <v-btn
+              block
+              tile
+              color = "success"
+              @click="TrackClear()"
+              :disabled = "isEditable"
+            >
+              clear 
+            </v-btn> -->
+          </v-col>
+          <v-col cols = 6>
+            <!-- <v-btn
+              block
+              tile
+              @click="TrackUpdate(trackObj)"
 
-        <!-- Item Next -->
-        <v-btn
-          block
-          tile
-          color="red"
-          @click = "trackMore = !trackMore"
-        > {{trackMore ? 'more' : 'back'}}
-        </v-btn>
-
-        <!-- TRACK CLEAR -->
-        <v-btn
-          block
-          tile
-          color = "success"
-          @click="TrackClear()"
-          
-          :disabled = "isEditable"
-        >clear </v-btn>
+            >
+              {{updateType}}
+            </v-btn> -->
+          </v-col>
+        </v-row>
       </v-col>
-      
-      
 
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { mapActions } from 'vuex';
-
+import { mapGetters, mapActions } from 'vuex';
 export default {
-
   created() {
-    //if the track is undefined, set it equal to a blank object
-    //this.$store.commit('TrackCreate', this.num)
-    this.$store.dispatch('TrackCreate', this.num)
+    this.TrackCreate(this.num)
+    this.initFieldInfo({trackNumber: this.num})
+    .then ( () => { this.localStateUpdate() })
+    .catch( error => {
+      //if 404, we use POST instead of PUT
+      if (error.response.status === 404) {
+        console.log('info not found, making sure we know.')
+        this.updateTypeToPost();
+      }
+      else if (error.response === undefined) {
+        console.log('no server response')
+      }
+      else {
+        console.log("UNCAUGHT ERROR:",error)
+      }
+    })
   },
-  
-  mounted() {
-    //if all the inputs are filled, disable fields
-    if (this.$store.getters.trackAllFilled(this.num) === true) {
-      this.isEditable = true;
-    }
-  },
-
-  destroyed() {},
 
   name: 'track',
-  
-  components: {
-  },
 
   data: function () {
     return {
+      updateType: 'put',
+
       days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       times: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-      listampm: ['am','pm'],
-      isEditable: false,
+      listampm: ['AM','PM'],
+      isEditable: undefined,
       trackMore: true,
       trackNumber: this.num,
+
+      
+      trackName: "",
+      trackLink: "",
+      trackDescription: "",
+      trackDay: "",
+      trackTime: "",
+      trackAMPM: "",
+      trackTags: "",
     }
   },
 
   computed: {
-    trackName: {
-      get: function () {
-        return this.getFieldInfo(this.trackNumber, 'name')
-      },
-      set: function (value) {
-        this.setFieldInfo({
-          number: this.trackNumber,   //the track ID
-          name: 'name',               //the track Field
-          value: value                //the content of the field
-        })
+    trackObj: function () {
+      return {
+        id: this.trackNumber,
+        trackName: this.trackName,
+        trackLink: this.trackLink,
+        trackDescription: this.trackDescription,
+        trackDay: this.trackDay,
+        trackTime: this.trackTime,
+        trackAMPM: this.trackAMPM,
+        trackTags: this.trackTags
       }
     },
+    // OLD FUNCTIONALITY FOR GET/SET FIELD VALUES
+    // trackName: {
+    //   get: function () {
+    //     return this.getFieldInfo(this.trackNumber, 'name')
+    //   },
+    //   set: function (value) {
+    //     this.setFieldInfo({
+    //       number: this.trackNumber,   //the track ID
+    //       name: 'name',               //the track Field
+    //       value: value                //the content of the field
+    //     })
+    //   }
+    // },
 
-    //TRACK LINK
-    trackLink: {
-      get: function () {
-        return this.getFieldInfo(this.trackNumber, 'link')
-      },
-      set: function (value) {
-        this.setFieldInfo({
-          number: this.trackNumber,
-          name: 'link',
-          value: value
-        })
-      }
-    },
-
-    //TRACK DESC.
-    trackDescription: {
-      get: function () {
-        return this.getFieldInfo(this.trackNumber, 'description')
-      },
-      set: function (value) {
-        this.setFieldInfo({
-          number: this.trackNumber,
-          name: 'description',
-          value: value
-        })
-      }
-    },
-
-    //TRACK DAY
-    trackDay: {
-      get: function () {
-        return this.getFieldInfo(this.trackNumber, 'day')
-      },
-      set: function (value) {
-        this.setFieldInfo({
-          number: this.trackNumber,
-          name: 'day',
-          value: value
-        })
-      }
-    },
-
-    //TRACK TIME
-    trackTime: {
-      get: function () {
-        return this.getFieldInfo(this.trackNumber, 'time')
-      },
-      set: function (value) {
-        this.setFieldInfo({
-          number: this.trackNumber,
-          name: 'time',
-          value: value
-        })
-      }
-    },
-
-    //TRACK AMPM
-    trackAMPM: {
-      get: function () {
-        return this.getFieldInfo(this.trackNumber, 'ampm')
-      },
-      set: function (value) {
-        this.setFieldInfo({
-          number: this.trackNumber,
-          name: 'ampm',
-          value: value
-        })
-      }
-    },
-    
-    trackTags: {
-      get: function () {
-        return this.getFieldInfo(this.trackNumber, 'tags')
-      },
-      set: function (value) {
-        this.setFieldInfo({
-          number: this.trackNumber,
-          name: 'tags',
-          value: value
-        })
-      }
-    },
-    
-    ...mapGetters({
-      getFieldInfo: 'trackFieldInfo',
-    }),
+    ...mapGetters('Tracks', {
+      tracks: 'allTracks',
+      trackAllFilled: 'trackTruthy'
+    })
     // END OF COMPUTED //
   },
 
@@ -299,14 +259,80 @@ export default {
   },
 
   methods: {
-    TrackClear() {
-      this.$store.dispatch('TrackClear', this.trackNumber)
+
+    //used in created() to make code there more succinct
+    localStateUpdate() {
+      this.fieldUpdate()
+      if (this.trackAllFilled(this.trackNumber) === true) {
+        this.isEditable = true;
+      }
+    },
+    
+    // this method handles the save functionality.
+    // it will toggle editability and, when making fields uneditable,
+    // it also saves info to the DB ######editable true = uneditable
+    editOrSave(){
+      //if currently uneditable, click should allow edits
+      if (this.isEditable) {
+        this.isEditable = !this.isEditable
+      }
+      //if currently editable, click should disable edits and save. 
+      else if (!this.isEditable){
+        console.log('clicked while editable. disabling edits')
+        this.isEditable = !this.isEditable
+        this.TrackUpdate(this.trackObj)
+      }
     },
 
-    ...mapActions({
-      setFieldInfo: 'UpdateInfo',
+    // handles wether to POST or PUT
+    updateTypeToPost(){
+      console.log('fieldUpdateType called')
+      this.updateType = 'post';
+      console.log(this.updateType)
+    },
+
+    // sets the local state equal to the vuex state
+    fieldUpdate(){
+      const track = this.tracks[this.trackNumber]
+      this.trackName = track.trackName
+      this.trackLink = track.trackLink
+      this.trackDescription = track.trackDescription
+      this.trackDay = track.trackDay
+      this.trackTime = track.trackTime
+      this.trackAMPM = track.trackAMPM
+      this.trackTags = track.trackTags
+    },
+
+    TrackUpdate(trackObj) {
+      //update the vuex state
+      this.setTrack( {
+        id: this.trackNumber,
+        track: trackObj, 
+        listUpdate: false
+      })
+      //call POST
+      if (this.updateType === 'post') {
+        this.postTrack(trackObj)}
+      //call PUT
+      else if (this.updateType === 'put') {
+        this.putTrack(trackObj)
+      }
+    },
+
+    TrackClear() {
+        this.TrackClear(this.trackNumber)
+    },
+
+    ...mapActions('Tracks', {
+      TrackClear: 'setTrackBlank',
+      initFieldInfo: 'initFieldInfo',
+      TrackCreate: 'trackCreate',
+      setTrack: 'setTrack', 
+      postTrack: 'postTrack',
+      putTrack: 'putTrack',
     })
     // END OF METHODS //
+    
   },
 }
 </script>

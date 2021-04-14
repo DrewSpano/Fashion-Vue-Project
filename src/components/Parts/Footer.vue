@@ -6,7 +6,7 @@
     <v-row
       justify="center"
       no-gutters
-    > trackingseams.com
+    > malltime.com
       
     </v-row>
   </v-footer>

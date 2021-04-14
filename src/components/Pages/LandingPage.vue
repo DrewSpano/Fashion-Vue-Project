@@ -67,21 +67,3 @@
     </v-row>
   </v-container>
 </template>
-
-<script>
-export default {
-
-    components: {
-    },
-    methods: {
-      LogUser: function() {             //toggles LoginState. Only used for testing- may delete
-        if (this.LoginState === false) {
-          this.LoginState = true
-        } else{this.LoginState = false}
-      },
-    },
-    props: {
-      myUsername: String
-    }
-}
-</script>

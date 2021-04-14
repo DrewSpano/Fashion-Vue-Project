@@ -80,10 +80,10 @@ export default {
   },
   methods: {
       logTrue() {
-          this.$store.commit('logTrue');
+          this.$store.commit('GeneralStore/logTrue');
       },
       logFalse() {
-          this.$store.commit('logFalse');
+          this.$store.commit('GeneralStore/logFalse');
       },
   },
     
