@@ -44,10 +44,10 @@
               large
               block
               color = "success"
-              link :to = "$store.state.loginState ? 'Profile' : 'Login' "
+              link :to = "$store.getters['Users/userLoggedIn'] ? 'Profile' : 'Login' "
               @click="logTrue"
             >
-              {{$store.state.loginState ? 'My Account' : 'Log In'}}
+              {{$store.getters['Users/userLoggedIn'] ? 'My Account' : 'Log In'}}
             </v-btn>
           </div>
 
@@ -57,10 +57,10 @@
               large
               block
               color = "success"
-              link :to = "$store.state.loginState ? '/' : 'Create' "
+              link :to = "$store.getters['Users/userLoggedIn'] ? '/' : 'Create' "
               @click="logFalse"
             >
-              {{$store.state.loginState ? 'Log Out' : 'Create'}}
+              {{$store.getters['Users/userLoggedIn'] ? 'Log Out' : 'Create'}}
             </v-btn>
           </div>
         </v-col>

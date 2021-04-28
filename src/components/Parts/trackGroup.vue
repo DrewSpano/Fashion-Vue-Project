@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <span v-if="debug">DEBUG: Array: {{trailArray}} | lastNum: {{lastNum}} | total tracks: {{this.$store.getters["Tracks/trackTotal"]}}</span>
+    <span v-if="debug">DEBUG: Array: {{trailArray}} | userID: {{userID}} | total tracks: {{this.$store.getters["Tracks/trackTotal"]}}</span>
     <span v-if="arrayNum !== null && arrayNum === []"> ERROR: IMPORTING AN EMPTY ARRAY </span>
     
     <v-row 
@@ -79,9 +79,13 @@ export default {
       // required: true
     },
     arrayNum:{
-      type: Array,
       default: null
     },
+
+    userID: {
+      type: Number
+    },
+
     skipNum: Number,
     prioNum: Number,
   },
@@ -97,11 +101,22 @@ export default {
   computed: {
     //makes an array based off either the imported array or
     //the first and last numbers
+    //trailArray is always set to baseArray
     baseArray: function ()  {
       let tempArray = [];
       //arrayNum is a prop that can be passed in to get a desired number of tracks. 
-      //baseArray returns arrayNum if it's anything other than the default value of null
+      //if prop arrayNum isn't null, return arrayNum. this basically checks if we have any specific arrays we want to display.
       if (this.arrayNum !== null) { return this.arrayNum }
+      //arrayNum is null. Now check the user stuff.
+      //if the userID isn't null, then pass the user's tracks as our ID
+      else if (this.userID !== null) { 
+        return this.givenTracks(this.userID)}
+      //just in case we pass in the userID as a prop & it's null or undefined, console log and return an empty array
+      else if (this.userID === null || this.userId === undefined) { 
+        console.log('null or undef userID passed in trackGroup')
+        return [] }
+
+      //if neither array nor user, use first/last num
       //defaults for first and last num are 1 and -1
       for (var i=this.firstNum; i<=this.lastNum; i++) {
         if ( i !== this.skipNum ) {
@@ -116,7 +131,11 @@ export default {
       trackExists: 'trackTruthySimple',
       tracklistData: 'allTracks',
       totalTrackers: 'trackTotal',
-      
+    }),
+
+    ...mapGetters('Users', {
+      givenTracks: 'givenTracks',
+      test2: 'test2'
     })
     // END OF COMPUTED //
   },

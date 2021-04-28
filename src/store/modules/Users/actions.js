@@ -1,44 +1,49 @@
 export default {
-
-  
-  UserLoginUpdate(context, userID) {
-    // if (context.state.users !== undefined) {
-        context.commit('USER_SET_LOGIN_ID', userID)
-    // }
+  UserLogin({commit}, id){
+    commit('USER_SET_LOGIN_ID',id)
   },
-    UserCreate(context, {email, username}) {
-    console.log('cum')
-    //get a random number (usually 4 digits), make sure that it's not already used
-    let newID;
-    do {newID = Math.floor(Math.random() * 10000)}
-    while (context.state.users[newID] !== undefined)
-    //set users.newid = {name:name email: email}
-    context.commit('USER_ID_SET', {id:newID, payload:{'name': username, 'email': email, 'tracks': []}})
 
-    // console.log(`Creating new User with ID ${newID}`);
-    // context.commit('USER_CREATE_NEW_ID', newID);
-    // console.log(`Setting ${newID}'s email to ${email}`)
-    // context.commit('USER_SET_ID_INFO',{id: newID, info:'email', payload: email});
-    // console.log(`Setting ${newID}'s name to ${username}`)
-    // context.commit('USER_SET_ID_INFO',{id: newID, info:'name', payload: username});
-    // context.commit('USER_INIT_TRACKS', newID)
-    context.commit('USERSIDS_ADD', newID);
-    },
+  UserCreate({state, commit}, {email, username}) {
+  //get a random number (usually 4 digits), make sure that it's not already used
+  let newID;
+  do {newID = Math.floor(Math.random() * 10000)}
+  while (state.users[newID] !== undefined)
+  //set users.newid = {name:name email: email}
+  commit('USER_ID_SET', {id:newID, payload:{'name': username, 'email': email, 'tracks': []}})
+  //add user to list
+  commit('USERSIDS_ADD', newID);
+  },
 
   UserIDsSync({state, commit}) {
     for (let user in state.users) {
-        if (state.usersIDs.indexOf(parseInt(user)) === -1){
-            // state.usersIDs.push(parseInt(user))
-            commit('USERSIDS_ADD', user)
-        }
+      if (state.userList.indexOf(parseInt(user)) === -1){
+        // state.usersIDs.push(parseInt(user))
+        commit('USERSIDS_ADD', user)
+      }
     }
   },
 
-  UserAddTracks({commit}, {id, tracks}) {
-      for (let track of tracks) {
-          commit('USER_ADD_TRACK',{id, track})
-      }
+  //multiple tracks in an array
+  UserAddTrackArray({commit}, {id, tracks}) {
+    for (let track of tracks) {
+      commit('USER_ADD_TRACK',{id, track})
+    }
   },
+
+  UserAddTrack({commit}, {id, track}) {
+    commit('USER_ADD_TRACK', {id, track})
+  },
+
+  UserRemoveTrack({commit, getters}, {id, track}) {
+    if (getters.tracks.indexOf(track) > -1) {
+      commit('USER_REMOVE_TRACK', {id, track})
+    }
+  }
+
+  // UserLoginWithUsername({dispatch, getters}, username) {
+  //   //user username to fetch id through getters
+  //   //pass id to UserLogin
+  // },
 
   
 }

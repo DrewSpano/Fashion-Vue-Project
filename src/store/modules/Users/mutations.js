@@ -2,7 +2,7 @@ const getDefaultState = () => {
     return{
         thisUser: -1,   //
         users: {
-            1234:{name: 'spandrew', tracks: [1,2,3,4,5]},
+            1234:{name: 'spandrew', tracks: [1,2,10,4,5]},
             4567:{name: 'Andwer', tracks: [1,3]}
             //nested objects
             //1234: {id: 1234, name: andrew, tracks: [1,2,3,4]}
@@ -24,8 +24,14 @@ export default {
     USER_ADD_TRACK (state, {id, track}) {
         state.users[id].tracks.push(track)
     },
+    USER_REMOVE_TRACK (state, {id, track}) {
+        state.users[id].tracks.splice(state.users[id].tracks.indexOf(track))
+    },
     USER_SET_LOGIN_ID (state, id) { 
         state.thisUser = id; 
+    },
+    USER_LOGOUT (state) {
+        state.thisUser = null
     },
     USERSIDS_ADD (state,id) {
         state.userList.push(parseInt(id))

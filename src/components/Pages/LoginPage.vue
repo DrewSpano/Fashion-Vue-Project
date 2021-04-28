@@ -13,16 +13,19 @@
           color="#ffe4c4" 
           elevation="3"
         >
-        <p class="ColTwo">This is all, or at least mostly, placeholder. What changes depends on whether or not I decide to actually handle accounts and how I do it. If I just use google login api then this is pretty much gone. </p>
+        <p class="ColTwo">This is placeholder, and serves simply to show user and login functionality. 
+          <br/> use the user id to log in
         <v-text-field
           label="Username"
           class="ColTwo"
           tabindex=1
+          v-model = "username"
         > </v-text-field>
 
         <v-text-field
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :type="show1 ? 'text' : 'password'"
+          disabled            
           name="input-10-1"
           label="Password"
           hint="At least 8 characters"
@@ -37,7 +40,7 @@
           tabindex=3
           link
           to="/"
-          @click="logTrue"
+          @click="login()"
         >
           login 
         </v-btn>
@@ -62,11 +65,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     name:"LoginPage",
 
     data () {
       return {
+        username:'',
         show1: false,
         rules: {
           required: value => !!value || 'Required.',
@@ -76,12 +81,21 @@ export default {
     },
 
     methods: {
-        logTrue() {
-            this.$emit('login-state-toggled', true);
-        },
-        logFalse() {
-            this.$emit('login-state-toggled', false);
-        },
+      // logTrue() {
+      //     this.$emit('login-state-toggled', true);
+      // },
+      // logFalse() {
+      //     this.$emit('login-state-toggled', false);
+      // },
+
+      login(){
+        console.log('cum')
+        this.Login(this.username)
+      },
+      ...mapActions('User',{
+        Login: 'UserLogin'
+      })
+
     },
     
 }

@@ -6,6 +6,7 @@ export default {
     return new Promise((resolve, reject) => {
       dispatch('getOneTrackFromDB', trackNumber)
         .then (response => {
+          console.log('cum', response)
           // console.log(response.data)
           dispatch('setTrack', {id: trackNumber, track: response.data})
           //update store from api
@@ -121,7 +122,7 @@ export default {
   //use information in the store to update the information in the db
   putTrack({state}, track) {
     return new Promise ((resolve, reject) => {
-      console.log(state.url)
+      console.log('i put')
       axios.put(state.url+'tracks/'+track.id, track)
       .then (response => {resolve (response)})
       .catch (error => {reject (error)})

@@ -179,6 +179,7 @@ export default {
     this.initFieldInfo({trackNumber: this.num})
     .then ( () => { this.localStateUpdate() })
     .catch( error => {
+      console.log('catch')
       //if 404, we use POST instead of PUT
       if (error.response.status === 404) {
         console.log('info not found, making sure we know.')

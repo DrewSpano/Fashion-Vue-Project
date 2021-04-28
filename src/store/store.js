@@ -1,16 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import VuexPersist from 'vuex-persist';
+import VuexPersist from 'vuex-persist';
 import GeneralStore from './modules/GeneralStore/index';
 import Tracks from './modules/Tracks/index';
 import Users from './modules/Users/index';
 
 Vue.use(Vuex);
 
-// const vuexLocalStorage = new VuexPersist({
-//     key: 'vuex',
-//     storage: window.localStorage
-// })
+const vuexLocalStorage = new VuexPersist({
+    reducer: (state) => ({ Users: state.Users }),
+    storage: window.localStorage
+})
 
 export default new Vuex.Store({
     modules: {
@@ -19,5 +19,5 @@ export default new Vuex.Store({
       Users,
     },
 
-    // plugins: [vuexLocalStorage.plugin]
+    plugins: [vuexLocalStorage.plugin]
 })
